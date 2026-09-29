@@ -1,0 +1,216 @@
+/* MyFinca Pro — una sola fuente para tema, superficies y layout responsive.
+   app.py define los tokens :root según st.session_state.dark_mode. */
+:root {
+  --mf-surface: var(--card-bg, #fff);
+  --mf-surface-raised: var(--card-bg-hover, #f4f8f4);
+  --mf-canvas: var(--bg, #f4f7f4);
+  --mf-ink: var(--text, #1a241c);
+  --mf-muted: var(--text-secondary, #506052);
+  --mf-subtle: var(--text-muted, #68766b);
+  --mf-line: var(--border, #dce5dd);
+  --mf-accent: var(--primary, #1b5e20);
+  --mf-radius: var(--radius, 12px);
+  --mf-shadow: var(--shadow, 0 4px 16px rgba(25,55,32,.08));
+  --mf-sidebar-ink: #f5fbf6;
+  --mf-sidebar-muted: #d3e3d7;
+  --mf-ease: cubic-bezier(.2,.8,.2,1);
+}
+
+html, body, [data-testid="stAppViewContainer"], .stApp {
+  background: var(--mf-canvas) !important;
+  color: var(--mf-ink);
+}
+body, .stApp, [data-testid="stAppViewContainer"] { color-scheme: inherit; }
+.block-container {
+  width: 100%; max-width: 1600px;
+  padding: clamp(.75rem,2vw,1.75rem) clamp(.75rem,2.5vw,2rem) 2rem;
+}
+#MainMenu, footer { visibility: hidden; }
+
+/* Native Streamlit metrics: style both the metric wrapper and internal blocks,
+   which differ between Streamlit releases. */
+[data-testid="stMetric"],
+div[data-testid="stMetric"],
+[data-testid="stMetric"] > div,
+[data-testid="stMetric"] [data-testid="stMetricLabel"],
+[data-testid="stMetric"] [data-testid="stMetricValue"],
+[data-testid="stMetric"] [data-testid="stMetricDelta"],
+[data-testid="stMetric"] label {
+  background-color: var(--mf-surface) !important;
+  color: var(--mf-ink) !important;
+  border-color: var(--mf-line) !important;
+}
+[data-testid="stMetric"] {
+  border: 1px solid var(--mf-line) !important;
+  border-radius: var(--mf-radius) !important;
+  box-shadow: var(--mf-shadow);
+  padding: .85rem 1rem;
+}
+[data-testid="stMetricLabel"] p, [data-testid="stMetricDelta"] {
+  color: var(--mf-muted) !important;
+}
+[data-testid="stMetricValue"], [data-testid="stMetricValue"] div {
+  color: var(--mf-ink) !important;
+  background: transparent !important;
+}
+
+/* Custom HTML cards use live tokens instead of colors frozen at import time. */
+.mf-card, .mf-metric-card, .login-container {
+  background: var(--mf-surface) !important;
+  color: var(--mf-ink) !important;
+  border-color: var(--mf-line) !important;
+}
+.login-container {
+  width: min(100% - 1rem, 420px);
+  margin: 1.5rem auto 1rem;
+  padding: clamp(1.25rem,4vw,2.25rem);
+  border: 1px solid var(--mf-line);
+  border-radius: 20px;
+  box-shadow: var(--mf-shadow);
+}
+.login-title {
+  color: var(--mf-accent) !important;
+  font-size: 1.75rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: .25rem;
+}
+.login-subtitle { color: var(--mf-muted) !important; text-align: center; margin-bottom: .5rem; }
+
+/* Bordered containers, dialogs, expanders and data surfaces. */
+[data-testid="stVerticalBlockBorderWrapper"],
+[data-testid="stVerticalBlockBorderWrapper"] > div,
+[data-testid="stDialog"], [role="dialog"] {
+  background-color: var(--mf-surface) !important;
+  border-color: var(--mf-line) !important;
+  color: var(--mf-ink) !important;
+  border-radius: var(--mf-radius);
+}
+[role="dialog"] { max-height: min(90dvh,900px); overflow-y: auto; }
+[data-testid="stDataFrame"], [data-testid="stTable"] { border-radius: 12px; overflow: hidden; }
+[data-testid="stExpander"] {
+  border: 1px solid var(--mf-line) !important;
+  border-radius: var(--mf-radius) !important;
+  background: var(--mf-surface) !important;
+}
+
+/* App text, widgets and focus states. */
+[data-testid="stWidgetLabel"] p, [data-testid="stMarkdownContainer"],
+[data-testid="stCaptionContainer"], [data-testid="stText"], .stMarkdown, .stCaption {
+  color: var(--mf-ink);
+}
+[data-testid="stCaptionContainer"], .stCaption { color: var(--mf-muted) !important; }
+input, textarea, [data-baseweb="select"] > div, [data-baseweb="input"] > div,
+[data-baseweb="textarea"] > div {
+  background-color: var(--input-bg,var(--mf-surface)) !important;
+  color: var(--mf-ink) !important;
+  border-color: var(--input-border,var(--mf-line)) !important;
+}
+input::placeholder, textarea::placeholder { color: var(--mf-subtle) !important; opacity: 1; }
+button, [role="button"] { min-height: 40px; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible,
+[data-testid="stSidebar"] button:focus-visible {
+  outline: 3px solid #72bb83 !important; outline-offset: 2px;
+}
+
+/* Sidebar intentionally stays deep green in both themes for consistent contrast. */
+[data-testid="stSidebar"] {
+  background: linear-gradient(165deg,#102f1d 0%,#143a24 58%,#1d5633 100%) !important;
+  border-right: 1px solid rgba(255,255,255,.12) !important;
+  box-shadow: 8px 0 28px rgba(8,30,16,.13);
+}
+[data-testid="stSidebar"] :is(p,span,label,h1,h2,h3,h4,strong,small,div,a,svg) {
+  color: var(--mf-sidebar-ink) !important;
+}
+[data-testid="stSidebar"] span[style*="opacity"],
+[data-testid="stSidebar"] div[style*="opacity"],
+[data-testid="stSidebar"] .stCaption,
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"] {
+  color: var(--mf-sidebar-muted) !important;
+}
+[data-testid="stSidebar"] button {
+  min-height: 42px; border-radius: 10px !important;
+  transition: background-color .16s var(--mf-ease), transform .16s var(--mf-ease), border-color .16s var(--mf-ease);
+}
+[data-testid="stSidebar"] button:hover {
+  background: rgba(255,255,255,.13) !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+
+/* Plotly's figure background, axis, ticks and legend are also set in Python
+   (components/charts.py); these rules color the Streamlit frame consistently. */
+[data-testid="stPlotlyChart"], .stPlotlyChart,
+[data-testid="stPlotlyChart"] > div {
+  background: var(--mf-surface) !important;
+  border-radius: 12px;
+}
+[data-testid="stPlotlyChart"] iframe { color-scheme: light dark; }
+
+.st-key-dashboard-kpis [data-testid="stHorizontalBlock"] { gap: .75rem; }
+.st-key-dashboard-kpis [data-testid="column"] { min-width: 0; }
+.st-key-dashboard-charts [data-testid="stHorizontalBlock"] { align-items: stretch; }
+
+@media (max-width: 900px) {
+  .block-container { padding-top: .8rem; }
+  [data-testid="stHorizontalBlock"] { flex-wrap: wrap !important; gap: .65rem !important; }
+  [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+    flex: 1 1 calc(50% - .65rem) !important;
+    min-width: min(220px,100%) !important;
+  }
+  [data-testid="stPlotlyChart"] { overflow-x: auto; }
+}
+@media (max-width: 600px) {
+  .block-container { padding: .65rem .65rem 1.25rem !important; }
+  [data-testid="stHorizontalBlock"] { gap: .5rem !important; }
+  [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+    flex: 1 1 calc(50% - .5rem) !important;
+    min-width: min(145px,calc(50% - .25rem)) !important;
+  }
+  .st-key-dashboard-charts [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+    flex-basis: 100% !important; min-width: 100% !important;
+  }
+  [data-testid="stMetric"] { padding: .7rem; }
+  [data-testid="stMetricValue"] { font-size: 1.45rem !important; }
+  [role="dialog"] { width: calc(100vw - 1rem) !important; max-width: calc(100vw - 1rem) !important; }
+  [role="dialog"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+    flex-basis: 100% !important; min-width: 100% !important;
+  }
+  [data-testid="stDataFrame"] { max-width: 100%; }
+}
+@media (max-width: 360px) {
+  [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+    flex-basis: 100% !important; min-width: 100% !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
+
+.mf-google-oauth-link {
+  box-sizing: border-box;
+  display: flex !important;
+  width: 100%;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  padding: .65rem 1rem;
+  border: 1px solid #2f64c5;
+  border-radius: .55rem;
+  background: #4285f4;
+  color: #fff !important;
+  font-weight: 650;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none !important;
+  transition: filter .15s ease, box-shadow .15s ease;
+}
+.mf-google-oauth-link:hover {
+  color: #fff !important;
+  filter: brightness(.94);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .18);
+}
+.mf-google-oauth-link:focus-visible {
+  outline: 3px solid var(--secondary);
+  outline-offset: 2px;
+}

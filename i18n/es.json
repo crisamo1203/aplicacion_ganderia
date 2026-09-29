@@ -1,0 +1,225 @@
+{
+  "app": {
+    "name": "MyFinca_Pro",
+    "tagline": "Gestión ganadera y agrícola"
+  },
+  "nav": {
+    "dashboard": "Gerencia Dashboard",
+    "inventario": "Inventario",
+    "ventas": "Ventas",
+    "produccion": "Producción",
+    "ceba": "Ceba",
+    "historial": "Historial",
+    "administracion": "Administración",
+    "salud": "Historial Médico",
+    "usuarios": "Usuarios"
+  },
+  "auth": {
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "google": "Continuar con Google",
+    "success": "Inicio de sesión correcto. Bienvenido a MyFinca_Pro.",
+    "failed": "Credenciales incorrectas. Verifica tu correo y contraseña.",
+    "logout_success": "Sesión cerrada correctamente."
+  },
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "export": "Exportar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "clear": "Limpiar",
+    "confirm": "Confirmar",
+    "back": "Volver",
+    "next": "Siguiente",
+    "loading": "Cargando...",
+    "no_data": "No hay datos disponibles",
+    "required": "Campo obligatorio",
+    "success": "Operación exitosa",
+    "error": "Error",
+    "warning": "Advertencia",
+    "info": "Información"
+  },
+  "animales": {
+    "title": "Inventario de Animales",
+    "new": "Nuevo Animal",
+    "edit": "Editar Animal",
+    "delete": "Eliminar Animal",
+    "fields": {
+      "nombre": "Nombre / Identificación",
+      "arete": "Arete",
+      "clase": "Clase",
+      "raza": "Raza",
+      "propietario": "Propietario",
+      "predio": "Predio",
+      "fecha_nacimiento": "Fecha de Nacimiento",
+      "sexo": "Sexo",
+      "estado": "Estado",
+      "tipo": "Tipo",
+      "proposito": "Propósito",
+      "especie": "Especie",
+      "origen": "Origen",
+      "proveedor": "Proveedor",
+      "valor_compra": "Valor Compra",
+      "valor_venta": "Valor Venta",
+      "marca": "Marca",
+      "color": "Color",
+      "peso_kg": "Peso (kg)",
+      "observaciones": "Observaciones"
+    },
+    "clases": {
+      "bovino": "Bovino",
+      "avicola": "Avícola"
+    },
+    "estados": {
+      "activo": "Activo",
+      "vendido": "Vendido",
+      "fallecido": "Fallecido",
+      "trasladado": "Trasladado",
+      "en_ceba": "En Ceba"
+    }
+  },
+  "ventas": {
+    "title": "Ventas",
+    "new": "Nueva Venta",
+    "fields": {
+      "fecha": "Fecha",
+      "tipo": "Tipo",
+      "detalle": "Detalle",
+      "cantidad": "Cantidad",
+      "valor_unitario": "Valor Unitario",
+      "valor_total": "Valor Total",
+      "metodo_pago": "Método de Pago",
+      "observaciones": "Observaciones"
+    },
+    "tipos": {
+      "carne_libra": "Carne Libra",
+      "cubeta": "Cubeta",
+      "leche": "Leche",
+      "animal": "Animal",
+      "otro": "Otro"
+    }
+  },
+  "produccion": {
+    "title": "Producción",
+    "new": "Nueva Producción",
+    "fields": {
+      "fecha": "Fecha",
+      "animal": "Animal",
+      "clase": "Clase",
+      "nombre_referencia": "Referencia",
+      "ordeno": "¿Ordeñó?",
+      "kilos_leche": "Kilos Leche",
+      "litros_leche": "Litros Leche",
+      "cantidad_huevos": "Cantidad Huevos",
+      "observaciones": "Observaciones"
+    }
+  },
+  "ceba": {
+    "title": "Ceba / Pesajes",
+    "new": "Nuevo Pesaje",
+    "fields": {
+      "animal": "Animal",
+      "fecha": "Fecha",
+      "peso_kg": "Peso (kg)",
+      "nota": "Nota"
+    }
+  },
+  "historial": {
+    "title": "Historial / Movimientos",
+    "new": "Nuevo Movimiento",
+    "fields": {
+      "animal": "Animal",
+      "tipo": "Tipo de Movimiento",
+      "fecha": "Fecha",
+      "predio_origen": "Predio Origen",
+      "predio_destino": "Predio Destino",
+      "valor": "Valor",
+      "comentarios": "Comentarios"
+    },
+    "tipos": {
+      "nacimiento": "Nacimiento en Finca",
+      "marcacion": "Marcación",
+      "movimiento": "Movimiento",
+      "venta": "Venta",
+      "ingreso": "Ingreso",
+      "salida": "Salida",
+      "fallecimiento": "Fallecimiento",
+      "otro": "Otro"
+    }
+  },
+  "administracion": {
+    "title": "Administración / Gastos",
+    "new": "Nuevo Gasto",
+    "fields": {
+      "fecha": "Fecha",
+      "detalle": "Detalle",
+      "valor": "Valor",
+      "metodo_pago": "Método de Pago",
+      "predio": "Predio",
+      "inversor": "Inversor",
+      "observaciones": "Observaciones"
+    }
+  },
+  "salud": {
+    "title": "Historial Médico / Sanidad",
+    "new": "Nuevo Procedimiento",
+    "fields": {
+      "animal": "Animal",
+      "fecha": "Fecha",
+      "tipo_procedimiento": "Procedimiento",
+      "medicamento": "Medicamento",
+      "veterinario": "Veterinario",
+      "proxima_cita": "Próxima Cita",
+      "observaciones": "Observaciones"
+    },
+    "procedimientos": {
+      "vacunacion": "Vacunación",
+      "purgas": "Purgas",
+      "marcacion": "Marcación",
+      "desparasitacion": "Desparasitación",
+      "tratamiento": "Tratamiento",
+      "revision": "Revisión",
+      "otro": "Otro"
+    }
+  },
+  "usuarios": {
+    "title": "Usuarios",
+    "fields": {
+      "nombre": "Nombre",
+      "email": "Email",
+      "telefono": "Teléfono",
+      "rol": "Rol",
+      "grupo": "Grupo",
+      "activo": "Activo"
+    },
+    "roles": {
+      "admin": "Administrador",
+      "gerencia": "Gerencia",
+      "encargado": "Encargado",
+      "colaborador": "Colaborador"
+    }
+  },
+  "alerts": {
+    "pesaje_vencido": "Animal sin pesaje reciente",
+    "vacuna_vencida": "Vacuna/desparasitación vencida",
+    "produccion_pendiente": "Producción pendiente de registro",
+    "gasto_sin_comprobante": "Gasto sin comprobante adjunto"
+  },
+  "predios": {
+    "guakpa": "Guakpa",
+    "monterredondo": "Monterredondo",
+    "san_jose": "San Jose",
+    "san_miguel": "San Miguel"
+  },
+  "propietarios": {
+    "cristian_arciniegas": "Cristian Arciniegas",
+    "daniel_arciniegas": "Daniel Arciniegas",
+    "elsa_tique": "Elsa Tique",
+    "finca_monterredondo": "Finca Monterredondo"
+  }
+}

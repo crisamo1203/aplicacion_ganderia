@@ -1,0 +1,66 @@
+-- Feedback/Suggestions System for MyFinca Pro
+create table public.feedback (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  tipo text not null check (tipo in ('problema', 'sugerencia', 'mejora', 'otro')),
+  titulo text not null check (char_length(trim(titulo)) > 0 and char_length(trim(titulo)) <= 200),
+  descripcion text not null check (char_length(trim(descripcion)) > 0),
+  modulo text, -- módulo donde ocurrió el problema
+  prioridad text not null default 'media' check (prioridad in ('baja', 'media', 'alta', 'critica')),
+  estado text not null default 'nuevo' check (estado in ('nuevo', 'en_revision', 'resuelto', 'cerrado')),
+  respuesta_admin text,
+  responded_by uuid references auth.users(id) on delete set null,
+  responded_at timestamptz,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create index feedback_user_idx on public.feedback(user_id);
+create index feedback_estado_idx on public.feedback(estado);
+create index feedback_tipo_idx on public.feedback(tipo);
+create index feedback_prioridad_idx on public.feedback(prioridad);
+create index feedback_created_idx on public.feedback(created_at desc);
+
+-- Función para actualizar updated_at
+create or replace function public.update_updated_at_column()
+returns trigger language plpgsql as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$;
+
+create trigger feedback_updated_at before update on public.feedback
+for each row execute procedure public.update_updated_at_column();
+
+-- RLS
+alter table public.feedback enable row level security;
+
+-- Usuarios ven solo su propio feedback
+create policy feedback_user_read on public.feedback for select to authenticated
+using (user_id = auth.uid());
+
+-- Usuarios pueden crear su propio feedback
+create policy feedback_user_insert on public.feedback for insert to authenticated
+with check (user_id = auth.uid());
+
+-- Usuarios pueden actualizar su propio feedback (solo si está 'nuevo')
+create policy feedback_user_update on public.feedback for update to authenticated
+using (user_id = auth.uid() and estado = 'nuevo')
+with check (user_id = auth.uid());
+
+-- Admins ven todo
+create policy feedback_admin_read on public.feedback for select to authenticated
+using (public.is_admin());
+
+-- Admins pueden actualizar cualquier feedback
+create policy feedback_admin_update on public.feedback for update to authenticated
+using (public.is_admin())
+with check (public.is_admin());
+
+-- Admins pueden eliminar
+create policy feedback_admin_delete on public.feedback for delete to authenticated
+using (public.is_admin());
+
+grant select, insert on public.feedback to authenticated;
+grant update, delete on public.feedback to authenticated;
